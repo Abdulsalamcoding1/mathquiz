@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Math Quiz</title>
+   <style>
+      body{
+         display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgb(11, 112, 162);
+      }
+      h1{
+         color: white;
+         font-family: Arial, Helvetica, sans-serif;
+         font-size: 5vh;
+      }
+      h1 span{
+         color: rgb(253, 173, 0);
+         font-size: 5.5vh;
+      }
+      input{
+         width: 100%;
+            height: 150px;
+            background-color: rgb(101, 202, 252);
+            outline:none;
+            overflow-y: auto;
+            resize: none;
+            color: white;
+            border: none;
+            padding: 5px 5px;
+            border-radius: 5px;
+            font-size: 4vh;
+      }
+      button{
+            width: 102%;
+            height: 50px;
+            color: white;
+            background-color: rgb(253, 173, 0);
+            border: none;
+            outline: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover{
+            background-color:rgb(249, 224, 4) ;
+            transition: 0.1s;
+        }
+      .container{
+            width: 35%;
+            height: 40%;
+        }
+        .output{
+         width: 100%;
+            height: 100px;
+            background-color: rgb(101, 202, 252);
+            outline:none;
+            overflow-y: auto;
+            resize: none;
+            color: white;
+            border: none;
+            padding: 5px 5px;
+            border-radius: 5px;
+            font-size: 4vh;
+        }
+        span{
+         font-size: 4vh;
+        }
+        @media only screen and (max-width:1000px){
+            .container{
+                width: 80% !important;
+            
+            }
+        }
+   </style>
+</head>
+<body>
+   <div class="container">
+   <header><h1>Simple Math <span>Quiz</span></h1></header>
+
+   <span class="val1"></span> <span>+</span> 
+ <span class="val2"> = </span>
+ <input type="text" name="answer"></span> <br><button>Check</button> <p></p>
+ <div class="output"></div>
+</div>
+
+ <script>
+   const app = function () {
+   const game = {};
+   const val1 = document.querySelector(".val1");
+   const val2 = document.querySelector(".val2");
+   const output = document.querySelector(".output");
+   const answer = document.querySelector("input");
+ function init() {
+ document.querySelector("button").addEventListener(
+ "click", checker);
+ loadQuestion();
+ }
+ function ranValue(min, max) {
+ return Math.floor(Math.random() * (max - min + 1) +
+ min);
+ }
+ function loadQuestion() {
+ game.val1 = ranValue(1, 100);
+ game.val2 = ranValue(1, 100);
+ game.answer = game.val1 + game.val2;
+ val1.textContent = game.val1;
+ val2.textContent = game.val2;
+ }
+ function checker() {
+ let bg = answer.value == game.answer ? "green" : "red";
+ output.innerHTML +=
+ `<div style="color:${bg}">${game.val1} +
+ ${game.val2} = ${game.answer} (${answer.value})
+ </div>`;
+ answer.value = "";
+ loadQuestion();
+ }
+ return {
+ init: init
+ };
+ }();
+ document.addEventListener('DOMContentLoaded', app.init);
+ </script>
+</body>
+</html>
